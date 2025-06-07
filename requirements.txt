@@ -1,0 +1,5 @@
+alembic==1.16.1
+psycopg2==2.9.10
+dotenv==0.9.9
+aiogram==3.20.0.post0
+asyncio==3.4.3
