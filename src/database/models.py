@@ -39,17 +39,6 @@ class LinkedService(Base):
 
     payments = relationship("Payment", back_populates="linked_service", cascade="all, delete")
 
-class Payment(Base):
-    __tablename__ = "payments"
-
-    id = Column(Integer, primary_key=True)
-    linked_service_id = Column(ForeignKey("linked_services.id"))
-
-    last_payment = Column(DateTime)
-    next_payment = Column(DateTime)
-
-    linked_service = relationship("LinkedService", back_populates="payments")
-
 class Group(Base):
     __tablename__ = "groups"
 
@@ -69,7 +58,36 @@ class GroupUser(Base):
     id = Column(Integer, primary_key=True)
     group_id = Column(ForeignKey("groups.id"))
     user_id = Column(ForeignKey("users.id"))
+    email = Column(String)
 
     group = relationship("Group", back_populates="users_assoc")
     user = relationship("User", back_populates="groups_assoc")
 
+class Admin(Base):
+    __tablename__ = "admins"
+
+    id = Column(Integer, primary_key=True)
+    telegram_id = Column(Integer, unique=True)
+
+class Payment(Base):
+    __tablename__ = "payments"
+
+    id = Column(Integer, primary_key=True)
+    linked_service_id = Column(ForeignKey("linked_services.id"))
+    amount = Column(Float)
+
+    last_payment = Column(DateTime)
+    next_payment = Column(DateTime)
+
+    linked_service = relationship("LinkedService", back_populates="payments")
+    payment_logs = relationship("PaymentLog", back_populates="linked_service", cascade="all, delete")
+
+class PaymentLog(Base):
+    __tablename__ = "payment_logs"
+
+    id = Column(Integer, primary_key=True)
+    linked_service_id = Column(ForeignKey("linked_services.id"))
+    amount = Column(Float)
+    paid_at = Column(DateTime)
+
+    linked_service = relationship("LinkedService", back_populates="payment_logs")
