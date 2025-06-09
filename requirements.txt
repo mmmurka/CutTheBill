@@ -6,3 +6,4 @@ asyncio==3.4.3
 pre-commit==4.2.0
 asyncpg==0.30.0
 greenlet==3.2.3
+black==25.1.0
