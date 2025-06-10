@@ -89,6 +89,5 @@ class PaymentLog(Base):
     payment_id = Column(ForeignKey("payments.id"), nullable=False)
     amount = Column(Float, nullable=False)
     paid_at = Column(DateTime)
-
     payment = relationship("Payment", back_populates="payment_logs")
 

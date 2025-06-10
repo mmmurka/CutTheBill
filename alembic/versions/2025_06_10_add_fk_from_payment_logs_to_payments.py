@@ -81,7 +81,6 @@ def downgrade() -> None:
             nullable=False,
         ),
     )
-    op.drop_constraint(None, "payment_logs", type_="foreignkey")
     op.create_foreign_key(
         op.f("payment_logs_linked_service_id_fkey"),
         "payment_logs",
