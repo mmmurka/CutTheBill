@@ -1,4 +1,4 @@
-from constrains import TELEGRAM_BOT_TOKEN
+from constants import TELEGRAM_BOT_TOKEN
 
 from aiogram import Bot, Router, Dispatcher
 
