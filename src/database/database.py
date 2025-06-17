@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 
-from constants import DATABASE_URL
+from src.constants import DATABASE_URL
 
 engine = create_async_engine(DATABASE_URL, echo=True)
 
