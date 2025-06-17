@@ -79,6 +79,8 @@ class Payment(Base):
     last_payment = Column(DateTime)
     next_payment = Column(DateTime)
 
+    payment_code = Column(String, unique=True, nullable=True)
+
     linked_service = relationship("LinkedService", back_populates="payments")
     payment_logs = relationship("PaymentLog", back_populates="payment", cascade="all, delete-orphan")
 

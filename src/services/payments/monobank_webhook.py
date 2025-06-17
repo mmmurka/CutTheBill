@@ -1,5 +1,4 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
-import json
 
 class DebugWebhookHandler(BaseHTTPRequestHandler):
     def do_GET(self):
