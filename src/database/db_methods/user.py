@@ -2,7 +2,6 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from loguru import logger
 
-from src.database.database import get_session
 from src.database.models import User
 
 
