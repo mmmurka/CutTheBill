@@ -12,3 +12,5 @@ pytest==8.4.0
 pytest-asyncio==1.0.0
 ngrok==1.4.0
 loguru
+fastapi==0.115.13
+uvicorn==0.34.3

@@ -1,8 +1,13 @@
-
-from sqlalchemy import Column, Integer, Table, ForeignKey, Float, DateTime, String
+import enum
+from sqlalchemy import Column, Integer, ForeignKey, Float, DateTime, String, Enum
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
+
+class PaymentStatus(enum.Enum):
+    WAITING = "waiting"
+    PAID = "paid"
+    EXPIRED = "expired"
 
 
 class User(Base):
@@ -75,14 +80,11 @@ class Payment(Base):
     id = Column(Integer, primary_key=True)
     linked_service_id = Column(ForeignKey("linked_services.id"), nullable=False)
     amount = Column(Float, nullable=False)
-
-    last_payment = Column(DateTime)
-    next_payment = Column(DateTime)
-
+    status = Column(Enum(PaymentStatus, default=PaymentStatus.WAITING, nullable=False))
     payment_code = Column(String, unique=True, nullable=True)
 
     linked_service = relationship("LinkedService", back_populates="payments")
-    payment_logs = relationship("PaymentLog", back_populates="payment", cascade="all, delete-orphan")
+    payment_logs = relationship("PaymentLog", back_populates="payment")
 
 class PaymentLog(Base):
     __tablename__ = "payment_logs"

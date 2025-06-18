@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from typing import AsyncGenerator, Final
 
 from sqlalchemy import Engine, create_engine
@@ -33,16 +34,9 @@ AsyncSessionFactory = async_sessionmaker(
     bind=async_engine, expire_on_commit=False, autoflush=False
 )
 
-
 async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionFactory() as session:
-        try:
-            yield session
-        except Exception as e:
-            raise e
-        finally:
-            await session.close()
-
+        yield session
 
 # =============================================== SYNC Celery Session ===============================================
 
